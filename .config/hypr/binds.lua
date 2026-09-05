@@ -5,7 +5,7 @@ local mainMod = "SUPER"
 
 hl.bind("F13", hl.dsp.pass({ window = "class:^(vesktop)$" }), { description = "Push to talk in Vesktop" })
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(file_man), { description = "Open file manager" })
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("killactive"), { description = "Close window" })
+hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Close window" })
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("killall waybar && hyprctl dispatch exec waybar"), { description = "Reload waybar" })
 
 -- Toggle floating
