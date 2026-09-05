@@ -100,6 +100,23 @@ require("lazy").setup({
         opts_extend = { "sources.default" },
     },
 
+    -- Telescope
+    {
+        'nvim-telescope/telescope.nvim', version = '*',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            -- optional but recommended
+            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        }
+    },
+
+    -- Harpoon2
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" }
+    },
+
     -- LSP Manager
     { "mason-org/mason.nvim", opts = {} },
     {
@@ -109,13 +126,14 @@ require("lazy").setup({
             "neovim/nvim-lspconfig",
         },
         opts = {
-            ensure_installed = { "pylsp" },
+            ensure_installed = { "pylsp", "rust_analyzer" },
         },
     },
     {
 	    "neovim/nvim-lspconfig",
 		config = function()
-            vim.lsp.config("pylisp", {})
+            vim.lsp.config("pylsp", {})
+            vim.lsp.config("rust_analyzer", {})
 		end,
 	}
 

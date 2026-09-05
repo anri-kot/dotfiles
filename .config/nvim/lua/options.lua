@@ -21,3 +21,6 @@ vim.opt.incsearch = true                  -- incremental search
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true                  -- case sensitive if uppercase
+
+-- Insert
+vim.opt.textwidth = 0

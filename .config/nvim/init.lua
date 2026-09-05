@@ -6,5 +6,6 @@ require('keymaps')
 require('plugins')
 require('colorscheme')
 require('lsp')
+require('harpoon_telescope')
 -- require('discordrc')
 

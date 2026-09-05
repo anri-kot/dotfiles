@@ -10,12 +10,12 @@ current_special=$(echo "$monitor" | jq -r '.specialWorkspace.name // empty')
 
 # If already in the special workspace → toggle out and stop
 if [[ "$current_special" == "$SPECIAL_FULL" ]]; then
-    hyprctl dispatch togglespecialworkspace "$SPECIAL_NAME"
+    hyprctl dispatch "hl.dsp.workspace.toggle_special(\"$SPECIAL_NAME\")"
     exit 0
 fi
 
 # Toggle into the special workspace
-hyprctl dispatch togglespecialworkspace "$SPECIAL_NAME"
+hyprctl dispatch "hl.dsp.workspace.toggle_special(\"$SPECIAL_NAME\")"
 
 # Check if Ghostty already exists (anywhere)
 if hyprctl -j clients | jq -e \
@@ -27,5 +27,5 @@ if hyprctl -j clients | jq -e \
         :
 else
     # Spawn Ghostty into the special workspace
-    hyprctl dispatch exec "[workspace $SPECIAL_FULL]" ghostty
+    hyprctl dispatch "hl.dsp.exec_cmd('ghostty', { workspace = \"$SPECIAL_FULL\" })"
 fi
