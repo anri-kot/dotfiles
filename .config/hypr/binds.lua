@@ -1,12 +1,19 @@
 --      KEYBINDS
 local mainMod = "SUPER"
+local HOME = os.getenv("HOME")
 
 --      Hyprland Keybinds
 
 hl.bind("F13", hl.dsp.pass({ window = "class:^(vesktop)$" }), { description = "Push to talk in Vesktop" })
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(file_man), { description = "Open file manager" })
 hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Close window" })
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("killall waybar && hyprctl dispatch exec waybar"), { description = "Reload waybar" })
+hl.bind(mainMod .. " + SHIFT + W", function()
+    local res = hl.dispatch(hl.dsp.exec_cmd("killall waybar"))
+    hl.timer(function ()
+        hl.exec_cmd("waybar")
+        hl.notification.create({ text = "Waybar reloaded", icon = "ok", timeout = 5000})
+    end,  { timeout = 500, type = "oneshot" })
+end, { description = "Reload Waybar"})
 
 -- Toggle floating
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle floating" })
@@ -53,7 +60,7 @@ hl.bind(mainMod .. " + 4", hl.dsp.focus({ workspace = 4 }))
 hl.bind(mainMod .. " + 5", hl.dsp.focus({ workspace = 5 }))
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special(s_1), { description = "Toggle special workspace" })
 -- hl.bind(mainMod .. " + RETURN", hl.dsp.workspace.toggle_special("terminal"))
-hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/open_terminal.sh"), { description = "Open terminal" })
+hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(HOME .. "/.config/hypr/scripts/open_terminal.sh"), { description = "Open terminal" })
 
 -- Move window to workspace
 hl.bind(mainMod .. " + SHIFT + 1", hl.dsp.window.move({ workspace = 1 }))
@@ -88,7 +95,9 @@ hl.bind("XF86AudioMute", hl.dsp.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ tog
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +10%"))
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 10%-"))
 
-hl.bind(mainMod .. " + escape", hl.dsp.exec_cmd("hyprshutdown --post-cmd 'poweroff'"), { description = "Shutdown" })
+-- Power Options
+local power_cmd = "kitty --title='Power Options' -e " .. HOME .. "/.config/hypr/scripts/power_opt"
+hl.bind(mainMod .. " + escape", hl.dsp.exec_cmd(power_cmd), { description = "Shutdown" })
 hl.bind("XF86PowerOff", hl.dsp.exec_cmd("hyprlock"))
 
 --           MISC

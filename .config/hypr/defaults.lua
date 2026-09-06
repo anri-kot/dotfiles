@@ -1,4 +1,3 @@
-
 term = "ghostty"
 s_1 = "specwork1"
 editor = "nvim"

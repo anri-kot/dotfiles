@@ -54,6 +54,11 @@ hl.window_rule({
     size = { 1200, 800 },
 })
 hl.window_rule({
+    name  = "power-opt-float",
+    match = { title = "Power Options" },
+    float = true,
+})
+hl.window_rule({
     name  = "btop-float",
     match = { title = "btop" },
     float = true,
