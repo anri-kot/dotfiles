@@ -96,8 +96,8 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +10%"))
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 10%-"))
 
 -- Power Options
-local power_cmd = "kitty --title='Power Options' -e " .. HOME .. "/.config/hypr/scripts/power_opt"
-hl.bind(mainMod .. " + escape", hl.dsp.exec_cmd(power_cmd), { description = "Shutdown" })
+hl.bind(mainMod .. " + escape", hl.dsp.exec_cmd("powermen"), { description = "Power Options" })
+
 hl.bind("XF86PowerOff", hl.dsp.exec_cmd("hyprlock"))
 
 --           MISC

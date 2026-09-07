@@ -4,6 +4,9 @@ require("binds")
 require("windowrules")
 require("startup")
 
+-- local bin
+hl.env("PATH", os.getenv("HOME") .. "/.local/bin:" .. os.getenv("PATH"))
+
 hl.monitor({
     output = "",
     mode = "1920x1080",
